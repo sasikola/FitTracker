@@ -15,7 +15,7 @@ import ProgressScreen from '../screens/ProgressScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// ─── Food Stack ───────────────────────────────────────────────
+// ────────── Food Stack ──────────
 function FoodStack() {
   return (
     <Stack.Navigator

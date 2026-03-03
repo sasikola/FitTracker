@@ -24,14 +24,6 @@ function getDayLabel(dateStr) {
   return days[new Date(dateStr).getDay()];
 }
 
-/**
- * react-native-chart-kit crashes with "Invalid number formatting character 'I'"
- * when ALL values in a dataset are 0, because it divides by (max - min = 0)
- * producing Infinity in the SVG path string.
- *
- * Fix: if every value is 0, inject a tiny stub (0.001) at the last position.
- * Also strip any NaN / Infinity that might slip through.
- */
 function sanitizeChartData(arr) {
   const clean = arr.map(v => {
     const n = Number(v);
@@ -106,7 +98,7 @@ export default function ProgressScreen() {
   const rawCarbs    = weekData.map(d => d.carbs || 0);
   const rawFats     = weekData.map(d => d.fats || 0);
 
-  // Sanitized values for charts only (prevents SVG crash on all-zero data)
+  // static values for charts only (prevents SVG crash on all-zero data)
   const chartCalories = sanitizeChartData(rawCalories);
   const chartProteins = sanitizeChartData(rawProteins);
   const chartCarbs    = sanitizeChartData(rawCarbs);
